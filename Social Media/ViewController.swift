@@ -40,9 +40,11 @@ class ViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
-            vc.selectedImage = flags[indexPath.row]
-            navigationController?.pushViewController(vc, animated: true)
+        if let detailViewControler = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
+            
+            detailViewControler.selectedImage = flags[indexPath.row]
+//            detailViewControler.title = "\(flags[indexPath.row])"
+            navigationController?.pushViewController(detailViewControler, animated: true)
         }
     }
 }

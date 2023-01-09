@@ -15,10 +15,23 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareButton))
+        
         if let imageToLoad = selectedImage {
             imageView.image = UIImage(named: imageToLoad)
         }
         self.view.backgroundColor = UIColor.systemGroupedBackground
+    }
+    
+    @objc func shareButton() {
+        guard let image = imageView.image?.jpegData(compressionQuality: 0.5) else {
+            print("Image not found")
+            return
+        }
+        
+        let detailViewController = UIActivityViewController(activityItems: [image, selectedImage?.replacingOccurrences(of: ".jpg", with: "")], applicationActivities: [])
+        detailViewController.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+        present(detailViewController, animated: true)
     }
     
 
