@@ -17,9 +17,12 @@ class ViewController: UITableViewController {
         let path = Bundle.main.resourcePath!
         let items = try! fileManager.contentsOfDirectory(atPath: path)
         
+        self.view.backgroundColor = UIColor.systemGroupedBackground
+        
         for item in items {
             if item.hasSuffix("png") {
-                flags.append(item)
+                let itemWithNoExtension = item.fileName()
+                flags.append(itemWithNoExtension)
             }
         }
         print(flags)
