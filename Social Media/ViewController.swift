@@ -13,7 +13,7 @@ class ViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Flags"
+        title = "World Flag Viewer"
         navigationController?.navigationBar.prefersLargeTitles = true
         
         let fileManager = FileManager.default
@@ -36,6 +36,7 @@ class ViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.textLabel?.text = flags[indexPath.row]
+        cell.imageView?.image = UIImage(named: flags[indexPath.row])
         return cell
     }
     
@@ -43,7 +44,6 @@ class ViewController: UITableViewController {
         if let detailViewControler = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
             
             detailViewControler.selectedImage = flags[indexPath.row]
-//            detailViewControler.title = "\(flags[indexPath.row])"
             navigationController?.pushViewController(detailViewControler, animated: true)
         }
     }
