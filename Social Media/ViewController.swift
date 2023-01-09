@@ -8,20 +8,30 @@
 import UIKit
 
 class ViewController: UITableViewController {
-    var pictures = [String]()
+    var flags = [String]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let fm = FileManager.default
+        let fileManager = FileManager.default
         let path = Bundle.main.resourcePath!
-        let items = try! fm.contentsOfDirectory(atPath: path)
+        let items = try! fileManager.contentsOfDirectory(atPath: path)
         
         for item in items {
-            pictures.append(item)
+            if item.hasSuffix("png") {
+                flags.append(item)
+            }
         }
-        print(pictures)
+        print(flags)
     }
-
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return flags.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        
+        return cell
+    }
 }
 
