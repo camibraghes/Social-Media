@@ -13,12 +13,13 @@ class ViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = "Flags"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
         let fileManager = FileManager.default
         let path = Bundle.main.resourcePath!
         let items = try! fileManager.contentsOfDirectory(atPath: path)
-        
-        self.view.backgroundColor = UIColor.systemGroupedBackground
-        
+                
         for item in items {
             if item.hasSuffix("png") {
                 let itemWithNoExtension = item.fileName()
